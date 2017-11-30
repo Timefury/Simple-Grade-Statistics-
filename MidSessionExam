@@ -1,0 +1,60 @@
+import math, os, string
+
+result = [['名次', '姓名', '语文', '数学', '英语', '物理', '化学', '生物', '政治', '历史', '地理', '总分', '平均分'], ]
+#open report.txt and import data
+f = open('report.txt', 'r')
+lines = f.readlines()
+for line in lines:
+    data = line.split()
+    gradeSum = 0
+    # calculate the sums and the averages
+    for grade in data[1:]:
+        gradeSum += int(grade)
+    averageGrade = gradeSum / (len(data[1:]))
+    data.append(str((round(gradeSum, 1))))
+    data.append(str(round(averageGrade, 1)))
+    result.append(data)
+f.close()
+numOfStudent = len(result[1:])
+# compute the 'average' column
+averageAll = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+for student in result[1:]:
+    averageAll[0] += round(int(student[1]))
+    averageAll[1] += int(student[2])
+    averageAll[2] += int(student[3])
+    averageAll[3] += int(student[4])
+    averageAll[4] += int(student[5])
+    averageAll[5] += int(student[6])
+    averageAll[6] += int(student[7])
+    averageAll[7] += int(student[8])
+    averageAll[8] += int(student[9])
+    averageAll[9] += int(student[10])
+    averageAll[10] += float(student[11])
+
+for i in range(0, 11):
+    averageAll[i] /= numOfStudent
+    averageAll[i] = round(averageAll[i], 1)
+    averageAll[i] = str(averageAll[i])
+averageAll.insert(0, '平均')
+averageAll.insert(0, '0')
+result.insert(1, averageAll)
+# sort
+newStudent = result[2:]
+newStudent.sort(key=lambda x: x[11], reverse=True)
+for i in range(1, len(newStudent) + 1):
+    newStudent[i - 1].insert(0, str(i))
+# add the first two columns
+newStudent.insert(0, result[0])
+newStudent.insert(1, result[1])
+# emerge result to String
+output = []
+for item in newStudent:
+    line  = " ".join(item)
+    line += '\n'
+    output.append(line)
+
+
+# create result.txt
+newf = open('result.txt', 'w',)
+newf.writelines(output)
+newf.close()
