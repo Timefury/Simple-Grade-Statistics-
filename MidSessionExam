@@ -33,8 +33,7 @@ for student in result[1:]:
 
 for i in range(0, 11):
     averageAll[i] /= numOfStudent
-    averageAll[i] = round(averageAll[i], 1)
-    averageAll[i] = str(averageAll[i])
+    averageAll[i] = str(round(averageAll[i], 1))
 averageAll.insert(0, '平均')
 averageAll.insert(0, '0')
 result.insert(1, averageAll)
@@ -50,7 +49,6 @@ newStudent.insert(1, result[1])
 # define grades less than 60
 for student in range(2, len(newStudent)):
     for grade in range(2, 11):
-
         if int(newStudent[student][grade]) < 60:
             newStudent[student][grade] = '不及格'
 
