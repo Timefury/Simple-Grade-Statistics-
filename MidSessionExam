@@ -46,6 +46,14 @@ for i in range(1, len(newStudent) + 1):
 # add the first two columns
 newStudent.insert(0, result[0])
 newStudent.insert(1, result[1])
+
+# define grades less than 60
+for student in range(2, len(newStudent)):
+    for grade in range(2, 11):
+
+        if int(newStudent[student][grade]) < 60:
+            newStudent[student][grade] = '不及格'
+
 # emerge result to String
 output = []
 for item in newStudent:
